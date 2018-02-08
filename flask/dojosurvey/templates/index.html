@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+    <form action="/results" method="post">
+        <fieldset>
+          <legend>Dojo Survey:</legend>
+          First name:<br>
+          <input type="text" name="firstname" value="First Name"><br>
+          Last name:<br>
+          <input type="text" name="lastname" value="Last Name"><br><br>
+
+          <select name="location"> <br>
+            <option value="thailand">Thailand</option>
+            <option value="canada">Canada</option>
+            <option value="france">France</option>
+            <option value="audi">America</option>
+          </select> <br><br>
+          <select name="favorite_Language"> <br>
+            <option value="mean">Mean</option>
+            <option value="python">Python</option>
+            <option value="java">Java</option>
+            <option value="ruby">Ruby</option>
+          </select>         <br><br> Comments: <br>
+
+          <textarea name="message" rows="10" cols="30"></textarea><br><br>
+          <input type="submit" value="Submit">
+        </fieldset>
+      </form>
+
+
+</body>
+</html>

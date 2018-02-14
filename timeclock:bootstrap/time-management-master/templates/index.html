@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Time Management</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<div class="container">
+	<div class="jumbotron">
+		<h1 id="theTime">{{ time.strftime("%H:%M:%S") }}</h1>
+	</div>
+
+	<table class="table table-striped table-hover">
+		<tr>
+			<th>Task</th>
+			<th>Start</th>
+			<th>End</th>
+			<th>Total</th>
+		</tr>
+		{% for task in tasks %}
+			<tr>
+				<td>{{ task.task }}</td>
+				<td>{{ task.start.strftime("%H:%M:%S") }}</td>
+				{% if task.end %}
+					<td>{{ task.end.strftime("%H:%M:%S") }}</td>
+					<td>{{ task.end - task.start }}</td>
+				{% else %}
+					<td>Ongoing</td>
+					<td>Ongoing</td>
+				{% endif %}
+			</tr>
+		{% endfor %}
+	</table>
+
+	{% if session["started"] == "False" %}
+
+	<form action="start" method="post">
+		<div class="form-group">
+			<label for="task">Task:</label>
+			<input type="text" class="form-control" id="task" name="task">
+		</div>
+		<input type="submit" value="Start" class="btn btn-primary">
+	</form>
+
+	{% else %}
+
+	<a href="stop"><button class="btn btn-danger">Stop</button></a>
+
+	{% endif %}
+
+	<a href="/clear"><button class="btn btn-link">Clear</button></a>
+	
+	</div>
+
+	<script type="text/javascript">
+		var theTime = document.getElementById("theTime");
+
+		setInterval(function(){ 
+			var t = new Date();
+			// these are ternary operators(pretty much if else statements in one line)
+			var h = t.getHours() < 10 ? "0" + t.getHours() : t.getHours();
+			var m = t.getMinutes() < 10 ? "0" + t.getMinutes() : t.getMinutes();
+			var s = t.getSeconds() < 10 ? "0" + t.getSeconds() : t.getSeconds();
+			theTime.innerHTML = `${h}:${m}:${s}`;
+		}, 1000);
+
+	</script>
+
+
+</body>
+</html>
